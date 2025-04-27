@@ -202,6 +202,13 @@ npm run dev
 
 ---
 
+## 📚 Documentation
+
+- [🛠 Architecture Overview](./architecture.md)
+- [🔄 User Flow Diagram](./flowchart.md)
+
+---
+
 ## 🗂️ Project Structure
 
 ```
