@@ -4,6 +4,16 @@ This document outlines the detailed user journey and message lifecycle in the **
 
 ---
 
+## 📑 Table of Contents
+
+- [📱 Authentication & Messaging Flow](#-authentication--messaging-flow)
+- [🔐 Authentication Flow Breakdown](#-authentication-flow-breakdown)
+- [💬 Messaging Flow Breakdown](#-messaging-flow-breakdown)
+- [🧪 Technical Implementation Highlights](#-technical-implementation-highlights)
+- [🚀 Performance Optimizations](#-performance-optimizations)
+
+---
+
 ## 📱 Authentication & Messaging Flow
 
 The diagram below visualizes the high-level application flow — starting from user entry and ending with message delivery and read receipts.

@@ -4,6 +4,24 @@ A full-featured, real-time chat platform built with **Next.js 14 (App Router)** 
 
 ---
 
+## 📑 Table of Contents
+
+- 📌 [Project Overview](#project-overview)
+- 🛠️ [Tech Stack](#tech-stack)
+- 📦 [package.json at a Glance](#packagejson-at-a-glance)
+- 🚀 [Getting Started](#getting-started)
+- 🧩 [Feature Breakdown](#feature-breakdown)
+- 📚 [Documentation](#documentation)
+- 🗂️ [Project Structure](#project-structure)
+- 🛠️ [Available Commands](#available-commands)
+- 🚢 [Deployment](#deployment)
+- 📜 [License](#license)
+- 👨‍💻 [About Me](#about-me)
+- 🙏 [Acknowledgments](#acknowledgments)
+- 📌 [Note](#note)
+
+---
+
 ## 📌 Project Overview
 
 This is **my** implementation of a Facebook-style messenger.  
@@ -268,7 +286,7 @@ This messenger app showcases my ability to integrate modern frameworks, realtime
 ## 📌 Note
 
 This app was originally built by following @codewithantonio’s YouTube tutorial for learning and inspiration.  
-The project was developed entirely in my local IDE, outside of GitHub, and I’ve reconstructed the commit history solely to reflect a realistic development flow and demonstrate my understanding of fullstack architecture, not as a record of the actual chronological build.
+The project was developed entirely in my local IDE (outside of GitHub) without initializing git, and I’ve reconstructed the commit history solely to reflect a realistic development flow and demonstrate my understanding of fullstack architecture, not as a record of the actual chronological build.
 
 ---
 
