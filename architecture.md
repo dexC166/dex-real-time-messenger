@@ -6,12 +6,12 @@ This document outlines the architecture of my Real-Time Messenger application bu
 
 ## 📑 Table of Contents
 
-- 🌿 [System Overview](#system-overview)
-- 📦 [Tech Stack](#tech-stack)
-- 🏗️ [Architecture Layers](#architecture-layers)
-- 🔐 [Security Considerations](#security-considerations)
-- 📈 [Performance Optimizations](#performance-optimizations)
-- 🛠️ [Future Improvements](#future-improvements)
+- 🌿 [System Overview](#-system-overview)
+- 📦 [Tech Stack](#-tech-stack)
+- 🏗️ [Architecture Layers](#-architecture-layers)
+- 🔐 [Security Considerations](#-security-considerations)
+- 📈 [Performance Optimizations](#-performance-optimizations)
+- 🛠️ [Future Improvements](#-future-improvements)
 
 ---
 

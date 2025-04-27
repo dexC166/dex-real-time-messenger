@@ -6,19 +6,19 @@ A full-featured, real-time chat platform built with **Next.js 14 (App Router)** 
 
 ## 📑 Table of Contents
 
-- 📌 [Project Overview](#project-overview)
-- 🛠️ [Tech Stack](#tech-stack)
-- 📦 [package.json at a Glance](#packagejson-at-a-glance)
-- 🚀 [Getting Started](#getting-started)
-- 🧩 [Feature Breakdown](#feature-breakdown)
-- 📚 [Documentation](#documentation)
-- 🗂️ [Project Structure](#project-structure)
-- 🛠️ [Available Commands](#available-commands)
-- 🚢 [Deployment](#deployment)
-- 📜 [License](#license)
-- 👨‍💻 [About Me](#about-me)
-- 🙏 [Acknowledgments](#acknowledgments)
-- 📌 [Note](#note)
+- 📌 [Project Overview](#-project-overview)
+- 🛠️ [Tech Stack](#-tech-stack)
+- 📦 [package.json at a Glance](#-packagejson-at-a-glance)
+- 🚀 [Getting Started](#-getting-started)
+- 🧩 [Feature Breakdown](#-feature-breakdown)
+- 📚 [Documentation](#-documentation)
+- 🗂️ [Project Structure](#-project-structure)
+- 🛠️ [Available Commands](#-available-commands)
+- 🚢 [Deployment](#-deployment)
+- 📜 [License](#-license)
+- 👨‍💻 [About Me](#-about-me)
+- 🙏 [Acknowledgments](#-acknowledgments)
+- 📌 [Note](#-note)
 
 ---
 
