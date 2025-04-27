@@ -6,21 +6,23 @@ A full-featured, real-time chat platform built with **Next.js 14 (App Router)** 
 
 ## 📑 Table of Contents
 
-- 📌 [Project Overview](#-project-overview)
+- 📌 [Project Overview](#project-overview)
 - 🛠️ [Tech Stack](#tech-stack)
-- 📦 [package.json at a Glance](#-packagejson-at-a-glance)
-- 🚀 [Getting Started](#-getting-started)
-- 🧩 [Feature Breakdown](#-feature-breakdown)
-- 📚 [Documentation](#-documentation)
+- 📦 [package.json at a Glance](#packagejson-at-a-glance)
+- 🚀 [Getting Started](#getting-started)
+- 🧩 [Feature Breakdown](#feature-breakdown)
+- 📚 [Documentation](#documentation)
 - 🗂️ [Project Structure](#project-structure)
 - 🛠️ [Available Commands](#available-commands)
 - 🚢 [Deployment](#deployment)
-- 📜 [License](#-license)
-- 👨‍💻 [About Me](#-about-me)
-- 🙏 [Acknowledgments](#-acknowledgments)
+- 📜 [License](#license)
+- 👨‍💻 [About Me](#about-me)
+- 🙏 [Acknowledgments](#acknowledgments)
 - 📌 [Note](#note)
 
 ---
+
+<a name="project-overview"></a>
 
 ## 📌 Project Overview
 
@@ -41,6 +43,8 @@ It delivers instant chat, read receipts, media sharing, and presence indicators 
 
 ---
 
+<a name="tech-stack"></a>
+
 ## 🛠️ Tech Stack
 
 | Layer / Purpose        | Technology                             |
@@ -58,6 +62,8 @@ It delivers instant chat, read receipts, media sharing, and presence indicators 
 | **Build / Deploy**     | Vercel                                 |
 
 ---
+
+<a name="packagejson-at-a-glance"></a>
 
 ## 📦 `package.json` at a Glance
 
@@ -139,6 +145,8 @@ It delivers instant chat, read receipts, media sharing, and presence indicators 
 
 ---
 
+<a name="getting-started"></a>
+
 ## 🚀 Getting Started
 
 ### ✅ Prerequisites
@@ -189,6 +197,8 @@ npm run dev
 
 ---
 
+<a name="feature-breakdown"></a>
+
 ## 🧩 Feature Breakdown
 
 ### Authentication
@@ -220,12 +230,16 @@ npm run dev
 
 ---
 
+<a name="documentation"></a>
+
 ## 📚 Documentation
 
 - [🛠 Architecture Overview](./architecture.md)
 - [🔄 User Flow Diagram](./flowchart.md)
 
 ---
+
+<a name="project-structure"></a>
 
 ## 🗂️ Project Structure
 
@@ -240,6 +254,8 @@ public/           # Static assets
 
 ---
 
+<a name="available-commands"></a>
+
 ## 🛠️ Available Commands
 
 | Command | Purpose                         |
@@ -250,6 +266,8 @@ public/           # Static assets
 | `lint`  | ESLint code-quality checks      |
 
 ---
+
+<a name="deployment"></a>
 
 ## 🚢 Deployment (Vercel)
 
@@ -262,6 +280,8 @@ _(Any platform that supports Next.js 14 works; Vercel just makes it painless.)_
 
 ---
 
+<a name="license"></a>
+
 ## 📜 License
 
 © 2025 **Dayle Cortes** – All rights reserved.  
@@ -269,12 +289,16 @@ Please contact me for licensing or commercial inquiries.
 
 ---
 
+<a name="about-me"></a>
+
 ## 👨‍💻 About Me
 
 I’m **Dayle Cortes**, a full-stack developer focused on responsive web experiences.  
 This messenger app showcases my ability to integrate modern frameworks, realtime infrastructure, and elegant UI design into a production-ready app.
 
 ---
+
+<a name="acknowledgments"></a>
 
 ## 🙏 Acknowledgments
 
