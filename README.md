@@ -43,6 +43,8 @@ It delivers instant chat, read receipts, media sharing, and presence indicators 
 
 ## 🛠️ Tech Stack
 
+This section lists the core technologies used in the project.
+
 | Layer / Purpose        | Technology                             |
 | ---------------------- | -------------------------------------- |
 | **Framework**          | Next.js 14 (App Router) + React        |
@@ -229,6 +231,8 @@ npm run dev
 
 ## 🗂️ Project Structure
 
+Here’s a breakdown of the folder organization in this app:
+
 ```
 app/              # Next.js entrypoints (App Router)
 components/       # Reusable UI elements
@@ -242,6 +246,8 @@ public/           # Static assets
 
 ## 🛠️ Available Commands
 
+Below are the common NPM scripts and what they do:
+
 | Command | Purpose                         |
 | ------- | ------------------------------- |
 | `dev`   | Launch local development server |
@@ -252,6 +258,8 @@ public/           # Static assets
 ---
 
 ## 🚢 Deployment (Vercel)
+
+Here’s how to deploy the app live:
 
 1. Push the repo to GitHub.
 2. Import it into **Vercel**.
