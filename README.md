@@ -7,14 +7,14 @@ A full-featured, real-time chat platform built with **Next.js 14 (App Router)** 
 ## 📑 Table of Contents
 
 - 📌 [Project Overview](#-project-overview)
-- 🛠️ [Tech Stack](#-tech-stack)
+- 🛠️ [Tech Stack](#tech-stack)
 - 📦 [package.json at a Glance](#-packagejson-at-a-glance)
 - 🚀 [Getting Started](#-getting-started)
 - 🧩 [Feature Breakdown](#-feature-breakdown)
 - 📚 [Documentation](#-documentation)
-- 🗂️ [Project Structure](#-project-structure)
-- 🛠️ [Available Commands](#-available-commands)
-- 🚢 [Deployment](#-deployment)
+- 🗂️ [Project Structure](#project-structure)
+- 🛠️ [Available Commands](#available-commands)
+- 🚢 [Deployment](#deployment)
 - 📜 [License](#-license)
 - 👨‍💻 [About Me](#-about-me)
 - 🙏 [Acknowledgments](#-acknowledgments)
@@ -42,8 +42,6 @@ It delivers instant chat, read receipts, media sharing, and presence indicators 
 ---
 
 ## 🛠️ Tech Stack
-
-This section lists the core technologies used in the project.
 
 | Layer / Purpose        | Technology                             |
 | ---------------------- | -------------------------------------- |
@@ -231,8 +229,6 @@ npm run dev
 
 ## 🗂️ Project Structure
 
-Here’s a breakdown of the folder organization in this app:
-
 ```
 app/              # Next.js entrypoints (App Router)
 components/       # Reusable UI elements
@@ -246,8 +242,6 @@ public/           # Static assets
 
 ## 🛠️ Available Commands
 
-Below are the common NPM scripts and what they do:
-
 | Command | Purpose                         |
 | ------- | ------------------------------- |
 | `dev`   | Launch local development server |
@@ -258,8 +252,6 @@ Below are the common NPM scripts and what they do:
 ---
 
 ## 🚢 Deployment (Vercel)
-
-Here’s how to deploy the app live:
 
 1. Push the repo to GitHub.
 2. Import it into **Vercel**.

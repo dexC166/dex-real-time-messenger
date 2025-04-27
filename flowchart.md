@@ -6,7 +6,7 @@ This document outlines the detailed user journey and message lifecycle in the **
 
 ## 📑 Table of Contents
 
-- 📱 [Authentication & Messaging Flow](#-authentication-messaging-flow)
+- 📱 [Authentication & Messaging Flow](#authentication-messaging-flow)
 - 🔐 [Authentication Flow Breakdown](#-authentication-flow-breakdown)
 - 💬 [Messaging Flow Breakdown](#-messaging-flow-breakdown)
 - 🧪 [Technical Implementation Highlights](#-technical-implementation-highlights)
