@@ -18,7 +18,7 @@ A full-featured, real-time chat platform built with **Next.js 14 (App Router)** 
 - 📜 [License](#-license)
 - 👨‍💻 [About Me](#-about-me)
 - 🙏 [Acknowledgments](#-acknowledgments)
-- 📌 [Note](#-note)
+- 📌 [Note](#note)
 
 ---
 
@@ -282,6 +282,8 @@ This messenger app showcases my ability to integrate modern frameworks, realtime
 - The open-source communities behind **Next.js**, **Prisma**, **Tailwind CSS**, and **Pusher**.
 
 ---
+
+<a name="note"></a>
 
 ## 📌 Note
 
