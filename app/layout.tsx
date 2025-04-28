@@ -12,8 +12,8 @@ interface RootLayoutProps {
 }
 
 export const metadata: Metadata = {
-  title: 'Messenger Clone',
-  description: 'Messenger Clone',
+  title: 'Dex-Real-Time-Messenger',
+  description: 'FB Messenger Inspired',
 };
 
 const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
