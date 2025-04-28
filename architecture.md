@@ -6,14 +6,16 @@ This document outlines the architecture of my Real-Time Messenger application bu
 
 ## 📑 Table of Contents
 
-- 🌿 [System Overview](#-system-overview)
-- 📦 [Tech Stack](#-tech-stack)
+- 🌿 [System Overview](#system-overview)
+- 📦 [Tech Stack](#tech-stack)
 - 🏗️ [Architecture Layers](#architecture-layers)
-- 🔐 [Security Considerations](#-security-considerations)
-- 📈 [Performance Optimizations](#-performance-optimizations)
-- 🛠️ [Future Improvements](#future-improvements)
+- 🔐 [Security Considerations](#security-considerations)
+- 📈 [Performance Optimizations](#performance-optimizations)
+- 🛠️ [Future Architecture Considerations](#future-architecture-considerations)
 
 ---
+
+<a name="system-overview"></a>
 
 ## 🌿 System Overview
 
@@ -22,6 +24,8 @@ The Real-Time Messenger is built as a modern full-stack application with real-ti
 ## <img src="./public/images/diagrams/architecture-overview.png"  alt="User Flow Diagram" width="1500"/>
 
 ---
+
+<a name="tech-stack"></a>
 
 ## 📦 Tech Stack
 
@@ -39,6 +43,8 @@ The Real-Time Messenger is built as a modern full-stack application with real-ti
 | **File Storage** | Cloudinary              | CDN for image and file storage          |
 
 ---
+
+<a name="architecture-layers"></a>
 
 ## 🏗️ Architecture Layers
 
@@ -151,6 +157,8 @@ The application is designed to be deployed on Vercel with:
 
 ---
 
+<a name="security-considerations"></a>
+
 ## 🔐 Security Considerations
 
 1. **Authentication**: Secure JWT handling with HTTP-only cookies
@@ -161,6 +169,8 @@ The application is designed to be deployed on Vercel with:
 
 ---
 
+<a name="performance-optimizations"></a>
+
 ## 📈 Performance Optimizations
 
 1. **Code Splitting**: Automatic code splitting by Next.js
@@ -170,6 +180,8 @@ The application is designed to be deployed on Vercel with:
 5. **Selective Presence Updates**: Only necessary real-time updates are transmitted
 
 ---
+
+<a name="future-architecture-considerations"></a>
 
 ## 🛠️ Future Architecture Considerations
 

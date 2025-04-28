@@ -7,12 +7,14 @@ This document outlines the detailed user journey and message lifecycle in the **
 ## 📑 Table of Contents
 
 - 📱 [Authentication & Messaging Flow](#authentication-messaging-flow)
-- 🔐 [Authentication Flow Breakdown](#-authentication-flow-breakdown)
-- 💬 [Messaging Flow Breakdown](#-messaging-flow-breakdown)
-- 🧪 [Technical Implementation Highlights](#-technical-implementation-highlights)
-- 🚀 [Performance Optimizations](#-performance-optimizations)
+- 🔐 [Authentication Flow Breakdown](#authentication-flow-breakdown)
+- 💬 [Messaging Flow Breakdown](#messaging-flow-breakdown)
+- 🧪 [Technical Implementation Highlights](#technical-implementation-highlights)
+- 🚀 [Performance Optimizations](#performance-optimizations)
 
 ---
+
+<a name="authentication-messaging-flow"></a>
 
 ## 📱 Authentication & Messaging Flow
 
@@ -21,6 +23,8 @@ The diagram below visualizes the high-level application flow — starting from u
 ## <img src="./public/images/diagrams/flowchart.png"  alt="User Flow Diagram" width="500"/>
 
 ---
+
+<a name="authentication-flow-breakdown"></a>
 
 ## 🔐 Authentication Flow Breakdown
 
@@ -53,6 +57,8 @@ The diagram below visualizes the high-level application flow — starting from u
   - **HTTP-only cookies** are set for session persistence.
 
 ---
+
+<a name="messaging-flow-breakdown"></a>
 
 ## 💬 Messaging Flow Breakdown
 
@@ -118,6 +124,8 @@ If creating a new conversation:
 
 ---
 
+<a name="technical-implementation-highlights"></a>
+
 ## 🧪 Technical Implementation Highlights
 
 ### Authentication
@@ -140,6 +148,8 @@ If creating a new conversation:
 - Real-time updates pushed with Pusher
 
 ---
+
+<a name="performance-optimizations"></a>
 
 ## 🚀 Performance Optimizations
 
