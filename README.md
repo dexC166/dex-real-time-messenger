@@ -246,23 +246,24 @@ npm run dev
 ## 🗂️ Project Structure
 
 ```
-app/                  # Next.js App Router structure (layout, routes, server components)
-  └── (site)/         # Main route group (e.g. authentication, protected routes)
+app/                  # Next.js App Router structure
+  └── (site)/         # Main route group
   └── actions/        # Server actions and form logic
   └── api/            # API route handlers
-  └── components/     # Reusable React components (buttons, inputs, modals)
-  └── context/        # React context providers (e.g. AuthProvider)
+  └── components/     # Reusable React components
+  └── context/        # React context providers
   └── conversations/  # Conversation-related routes and logic
-  └── hooks/          # Custom React hooks (e.g. useConversations)
-  └── libs/           # External libraries & utilities (e.g. Pusher, Clerk, helpers)
+  └── hooks/          # Custom React hooks
+  └── libs/           # External libraries & utilities
   └── types/          # TypeScript types shared across app
   └── users/          # User-related routes and logic
-  └── globals.css     # Global CSS (Tailwind entrypoint)
+  └── favicon.ico     # Favicon Icon Logo
+  └── globals.css     # Global CSS
   └── layout.tsx      # Root layout component for app router
 
-pages/                # Legacy (or optional) pages directory if SSR fallback exists
+pages/                # For Pusher
 prisma/               # Prisma schema and DB client setup
-public/               # Static files (e.g. images, favicons)
+public/               # Static files
 
 test/                 # Unit and integration test files
 
