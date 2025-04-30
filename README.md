@@ -89,7 +89,7 @@ It delivers instant chat, read receipts, media sharing, and presence indicators 
 
 ```json
 {
-  "name": "messenger-clone",
+  "name": "dex-real-time-messenger",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -163,12 +163,14 @@ Create a **`.env`** file in the project root:
 DATABASE_URL=
 
 NEXTAUTH_SECRET=
+NEXTAUTH_URL=
 
 NEXT_PUBLIC_PUSHER_APP_KEY=
 PUSHER_APP_ID=
 PUSHER_SECRET=
 
 NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=
+NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET=
 
 GITHUB_ID=
 GITHUB_SECRET=
@@ -181,8 +183,8 @@ GOOGLE_CLIENT_SECRET=
 
 ```bash
 # 1 – Clone
-git clone https://github.com/dexC166/real-time-messenger.git
-cd real-time-messenger
+git clone https://github.com/dexC166/dex-real-time-messenger.git
+cd dex-real-time-messenger
 
 # 2 – Install deps
 npm install            # or pnpm install
@@ -244,12 +246,43 @@ npm run dev
 ## 🗂️ Project Structure
 
 ```
-app/              # Next.js entrypoints (App Router)
-components/       # Reusable UI elements
-hooks/            # Custom React hooks
-lib/              # Helpers (Pusher, Cloudinary, etc.)
-prisma/           # Schema & migrations
-public/           # Static assets
+app/                  # Next.js App Router structure (layout, routes, server components)
+  └── (site)/         # Main route group (e.g. authentication, protected routes)
+  └── actions/        # Server actions and form logic
+  └── api/            # API route handlers
+  └── components/     # Reusable React components (buttons, inputs, modals)
+  └── context/        # React context providers (e.g. AuthProvider)
+  └── conversations/  # Conversation-related routes and logic
+  └── hooks/          # Custom React hooks (e.g. useConversations)
+  └── libs/           # External libraries & utilities (e.g. Pusher, Clerk, helpers)
+  └── types/          # TypeScript types shared across app
+  └── users/          # User-related routes and logic
+  └── globals.css     # Global CSS (Tailwind entrypoint)
+  └── layout.tsx      # Root layout component for app router
+
+pages/                # Legacy (or optional) pages directory if SSR fallback exists
+prisma/               # Prisma schema and DB client setup
+public/               # Static files (e.g. images, favicons)
+
+test/                 # Unit and integration test files
+
+.env                  # Environment variables
+.env.example          # Example env for collaborators
+
+architecture.md       # Overview of the system design and tech stack
+flowchart.md          # Visual flow diagram of feature/component interaction
+
+next.config.js        # Next.js configuration
+next-env.d.ts         # TypeScript support for Next.js
+tailwind.config.ts    # Tailwind CSS configuration
+postcss.config.js     # PostCSS configuration
+tsconfig.json         # TypeScript compiler settings
+tsconfig.tsbuildinfo  # TypeScript build cache
+
+package.json          # Project dependencies and scripts
+package-lock.json     # Exact version lockfile for reproducible installs
+README.md             # Project documentation (you’re here)
+
 ```
 
 ---
@@ -258,12 +291,13 @@ public/           # Static assets
 
 ## 🛠️ Available Commands
 
-| Command | Purpose                         |
-| ------- | ------------------------------- |
-| `dev`   | Launch local development server |
-| `build` | Create a production build       |
-| `start` | Run the production build        |
-| `lint`  | ESLint code-quality checks      |
+| Command       | Purpose                         |
+| ------------- | ------------------------------- |
+| `dev`         | Launch local development server |
+| `build`       | Create a production build       |
+| `start`       | Run the production build        |
+| `lint`        | ESLint code-quality checks      |
+| `postinstall` | Generates Prisma                |
 
 ---
 
@@ -312,7 +346,7 @@ This messenger app showcases my ability to integrate modern frameworks, realtime
 ## 📌 Note
 
 This app was originally built by following @codewithantonio’s YouTube tutorial for learning and inspiration.  
-The project was developed entirely in my local IDE (outside of GitHub) without initializing git, and I’ve reconstructed the commit history solely to reflect a realistic development flow and demonstrate my understanding of fullstack architecture, not as a record of the actual chronological build.
+The project was developed entirely in my local IDE (outside of GitHub) without initializing git, and I’ve reconstructed the commit history solely to reflect a realistic development flow and demonstrate my understanding of fullstack architecture and recent modifications, not as a record of the actual chronological build.
 
 ---
 
