@@ -193,4 +193,8 @@ The application is designed to be deployed on Vercel with:
 
 ---
 
+For micro-level user-flow, please refer to [flowchart.md](./flowchart.md).
+
+---
+
 © 2025 Dayle Cortes - All Rights Reserved

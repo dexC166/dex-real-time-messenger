@@ -162,4 +162,8 @@ If creating a new conversation:
 
 ---
 
+For high-level system architecture, please refer to [architecture.md](./architecture.md).
+
+---
+
 © 2025 Dayle Cortes — All Rights Reserved
