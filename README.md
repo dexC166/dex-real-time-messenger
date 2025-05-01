@@ -1,6 +1,17 @@
-# Real-Time-Messenger 📨
+<div align="center">
+  <br />
+    <a href="https://dex-real-time-messenger.vercel.app/" target="_blank">
+      <kbd><img src="./public/images/project-banner.png" alt="Project Banner"></kbd>
+    </a>
+  <br />
+
+---
+
+# Dex-Real-Time-Messenger 📨
 
 A full-featured, real-time chat platform built with **Next.js 14 (App Router)** and **TypeScript**.
+
+</div>
 
 ---
 

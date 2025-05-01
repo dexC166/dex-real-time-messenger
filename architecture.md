@@ -1,6 +1,17 @@
+<div align="center">
+  <br />
+    <a href="https://dex-real-time-messenger.vercel.app/" target="_blank">
+      <kbd><img src="./public/images/project-banner.png" alt="Project Banner"></kbd>
+    </a>
+  <br />
+
+---
+
 # 📲💻 Real-Time-Messenger Architecture
 
 This document outlines the architecture of my Real-Time Messenger application built with Next.js 14, focusing on the design decisions, data flow, and technical implementation.
+
+</div>
 
 ---
 
