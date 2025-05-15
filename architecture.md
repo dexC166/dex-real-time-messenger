@@ -32,7 +32,7 @@ This document outlines the architecture of my Real-Time Messenger application bu
 
 The Real-Time Messenger is built as a modern full-stack application with real-time capabilities, following a client-server architecture within Next.js 14's App Router framework.
 
-## <img src="./public/images/diagrams/architecture-overview.png"  alt="User Flow Diagram" width="1500"/>
+## <img src="./public/images/diagrams/architecture-overview.png"  alt="architecture Diagram" width="1500"/>
 
 ---
 
