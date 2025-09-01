@@ -1,6 +1,6 @@
-# 🔄 Messenger User Flow
+# 🔄 Dex Messenger User Flow
 
-This document outlines the detailed user journey and message lifecycle in the **Real-Time-Messenger** application. It walks through every step from login to real-time-message delivery, highlighting the behind-the-scenes mechanics and architecture integrations.
+This document outlines the detailed user journey and message lifecycle in the **Dex Messenger** application. It walks through every step from login to real-time-message delivery, highlighting the behind-the-scenes mechanics and architecture integrations.
 
 ---
 

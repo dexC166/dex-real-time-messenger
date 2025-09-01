@@ -171,23 +171,33 @@ It delivers instant chat, read receipts, media sharing, and presence indicators 
 Create a **`.env`** file in the project root:
 
 ```env
-DATABASE_URL=
+#Mongodb Atlas db
+DATABASE_URL="mongodb+srv://<username>:<password>@cluster0.z9tbmpr.mongodb.net/test"
+NEXTAUTH_SECRET="NEXTAUTH_SECRET"
 
-NEXTAUTH_SECRET=
-NEXTAUTH_URL=
+#Vercel URL
+NEXTAUTH_URL=https://appName.vercel.app
 
-NEXT_PUBLIC_PUSHER_APP_KEY=
-PUSHER_APP_ID=
-PUSHER_SECRET=
+#Local Development URL
+NEXTAUTH_URL=http://localhost:3000
 
+#Cloudinary for file upload storage
 NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=
+#From Cloudinary Preset
 NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET=
 
+#Github Authentication
 GITHUB_ID=
 GITHUB_SECRET=
 
+#Google Authentication
 GOOGLE_CLIENT_ID=
 GOOGLE_CLIENT_SECRET=
+
+#Pusher for real-time messaging functionality
+NEXT_PUBLIC_PUSHER_APP_KEY=
+PUSHER_APP_ID=
+PUSHER_SECRET=
 ```
 
 ### 📦 Installation
@@ -275,8 +285,6 @@ app/                  # Next.js App Router structure
 pages/                # For Pusher
 prisma/               # Prisma schema and DB client setup
 public/               # Static files
-
-test/                 # Unit and integration test files
 
 .env                  # Environment variables
 .env.example          # Example env for collaborators
