@@ -1,4 +1,4 @@
-import { BsChatLeftDotsFill } from 'react-icons/bs';
+import { BsChatDotsFill } from 'react-icons/bs';
 
 const EmptyState = () => {
   return (
@@ -25,7 +25,7 @@ const EmptyState = () => {
           gap-3
         "
       >
-        <BsChatLeftDotsFill size={64} style={{ color: '#0266C8' }} />
+        <BsChatDotsFill size={64} style={{ color: '#0266C8' }} />
         <h3
           className="
             mt-2
