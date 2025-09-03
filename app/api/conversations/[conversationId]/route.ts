@@ -53,15 +53,11 @@ export async function DELETE(
 
     return NextResponse.json(deletedConversation);
   } catch (error: any) {
-    console.log(error, 'ERROR_CONVERSATION_DELETE');
     return new NextResponse('Internal Error', { status: 500 });
   }
 }
 
-export async function GET(
-  request: Request,
-  { params }: { params: IParams }
-) {
+export async function GET(request: Request, { params }: { params: IParams }) {
   try {
     const currentUser = await getCurrentUser();
     const { conversationId } = params;
@@ -85,7 +81,6 @@ export async function GET(
 
     return NextResponse.json(conversation);
   } catch (error: any) {
-    console.log(error, 'ERROR_FETCHING_CONVERSATION');
     return new NextResponse('Internal Error', { status: 500 });
   }
 }

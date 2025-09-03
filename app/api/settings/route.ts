@@ -25,7 +25,6 @@ export async function POST(request: Request) {
 
     return NextResponse.json(updatedUser);
   } catch (error: any) {
-    console.log(error, 'ERROR_SETTINGS');
     return new NextResponse('Interal Error', { status: 500 });
   }
 }
