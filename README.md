@@ -1,6 +1,6 @@
 <div align="center">
   <br />
-    <a href="https://dex-real-time-messenger.vercel.app/" target="_blank">
+    <a href="https://dex-messenger.vercel.app/" target="_blank">
       <kbd><img src="./public/images/project-banner.png" alt="Project Banner"></kbd>
     </a>
   <br />
