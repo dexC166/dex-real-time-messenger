@@ -49,6 +49,7 @@ It delivers instant chat, read receipts, media sharing, and presence indicators 
 - 🔍 In-thread message search
 - 🔐 Secure auth (credentials + Google / GitHub OAuth)
 - 🖥️ Mobile-first responsive design
+- 📖 **Comprehensive JSDoc documentation** with mentoring tone
 
 > **Inspiration:** Antonio Erdeljac’s Messenger Clone tutorial jump-started this build, but files have been reviewed, refactored, and expanded to match **my** standards.
 
@@ -250,6 +251,9 @@ npm run dev
 - Refactored API routes for clean contracts
 - Hardened message rendering for edge-case files
 - Improved group profile drawer layout & info density
+- **Added comprehensive JSDoc documentation** with mentoring tone throughout the codebase
+- **Enhanced security documentation** with detailed explanations of authentication and authorization patterns
+- **Context-aware code comments** that explain integration patterns and usage examples
 
 ---
 
@@ -259,6 +263,65 @@ npm run dev
 
 - 🛠️ [Architecture Overview](./architecture.md)
 - 🔄 [User Flow Diagram](./flowchart.md)
+- 📖 [Code Documentation](#code-documentation)
+
+### 📖 Code Documentation
+
+This codebase features **comprehensive JSDoc documentation** throughout all major components, API routes, and utilities. The documentation follows a **mentoring tone** approach, explaining not just _what_ the code does, but _why_ design decisions were made.
+
+#### 🎯 Documentation Philosophy
+
+- **Mentoring Approach**: Comments are written as if teaching a junior developer
+- **Context-Aware**: Documentation includes usage patterns and integration examples
+- **Security-Focused**: Emphasizes security considerations and best practices
+- **Architecture-Driven**: Explains how components fit into the overall system
+
+#### 📋 Documented Areas
+
+| Component Type       | Files Documented          | Key Features                                      |
+| -------------------- | ------------------------- | ------------------------------------------------- |
+| **API Routes**       | All `/api/*` endpoints    | Authentication, validation, error handling        |
+| **React Components** | All major UI components   | Props, state management, integration patterns     |
+| **Custom Hooks**     | All `/hooks/*` files      | State management, real-time features, performance |
+| **Server Actions**   | All `/actions/*` files    | Data fetching, security, database operations      |
+| **Configuration**    | Core config files         | Setup, environment, integration patterns          |
+| **Utilities**        | Library and utility files | Authentication, real-time, database connections   |
+
+#### 🔍 Documentation Highlights
+
+- **Security Patterns**: Detailed explanations of authentication, authorization, and data validation
+- **Real-time Features**: Comprehensive coverage of Pusher integration and presence tracking
+- **Database Operations**: Prisma ORM patterns, query optimization, and error handling
+- **State Management**: Zustand store patterns and React state synchronization
+- **API Integration**: Request/response patterns, error handling, and client integration
+- **Performance Considerations**: Optimization strategies and memory management
+
+#### 💡 Example Documentation Style
+
+```typescript
+/**
+ * User-Authorized Conversation Access Validation
+ *
+ * Validates that the current user has access to the specified conversation
+ * before retrieving messages. This validation prevents unauthorized access
+ * to conversation messages and ensures proper data security.
+ *
+ * Why conversation access validation is essential:
+ * - Security: Prevents unauthorized access to conversation messages
+ * - Privacy: Protects user data from unauthorized access
+ * - Data integrity: Ensures proper user-specific data access
+ * - User experience: Provides clear error messages for unauthorized access
+ * - Compliance: Maintains proper data access controls
+ */
+```
+
+#### 🚀 Benefits for Developers
+
+- **Onboarding**: New developers can understand the codebase quickly
+- **Maintenance**: Clear explanations make debugging and updates easier
+- **Security**: Security considerations are explicitly documented
+- **Best Practices**: Patterns and approaches are explained with reasoning
+- **Integration**: Usage examples show how components work together
 
 ---
 
