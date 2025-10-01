@@ -1,77 +1,576 @@
+/**
+ * Prisma Schema for Dex Real-Time Messenger
+ * 
+ * This schema defines the complete data model for our Next.js 14 real-time messaging
+ * application. It's designed to work with MongoDB as a NoSQL database, providing
+ * flexible document storage while maintaining relational integrity through Prisma's
+ * ORM capabilities.
+ * 
+ * Key Features:
+ * - MongoDB integration with ObjectId primary keys
+ * - NextAuth.js authentication integration
+ * - Real-time messaging data model
+ * - Group and direct conversation support
+ * - Message read receipts and user presence
+ * - OAuth provider account management
+ * 
+ * Data Model Overview:
+ * - User: Core user accounts with authentication and profile data
+ * - Account: OAuth provider connections (Google, GitHub, credentials)
+ * - Conversation: Chat rooms supporting both direct and group messaging
+ * - Message: Individual messages with read receipts and media support
+ * 
+ * This schema is essential for our messaging app because it provides the foundation
+ * for user management, conversation threading, real-time message delivery, and
+ * secure authentication across multiple providers.
+ * 
+ * @fileoverview Prisma schema for Next.js 14 real-time messaging application
+ * @author Dayle Cortes
+ * @since 2025
+ */
+
+/**
+ * Prisma Client Generator Configuration
+ * 
+ * Configures Prisma to generate a TypeScript client that provides type-safe
+ * database access throughout our Next.js application. This is crucial for
+ * maintaining type safety in our API routes and server actions.
+ * 
+ * Why prisma-client-js?
+ * - Generates TypeScript types for all models and operations
+ * - Provides IntelliSense and compile-time error checking
+ * - Enables type-safe database queries in our API routes
+ * - Integrates seamlessly with Next.js server components and actions
+ */
 generator client {
   provider = "prisma-client-js"
 }
 
+/**
+ * Database Connection Configuration
+ * 
+ * Defines the connection to our MongoDB database. MongoDB is chosen for this
+ * messaging app because it provides excellent support for:
+ * - Flexible document schemas (perfect for message variations)
+ * - Horizontal scaling (important for real-time messaging)
+ * - Array operations (conversation participants, message seen status)
+ * - Embedded documents (message metadata, user preferences)
+ * 
+ * The DATABASE_URL environment variable contains the connection string with
+ * authentication credentials and database name.
+ */
 datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
+/**
+ * User Model - Core User Account Data
+ * 
+ * Represents user accounts in our messaging application. This model serves as the
+ * central hub connecting authentication, conversations, and messaging functionality.
+ * 
+ * Key Relationships:
+ * - One-to-many with Account (OAuth providers)
+ * - Many-to-many with Conversation (users can be in multiple conversations)
+ * - One-to-many with Message (users can send many messages)
+ * - Many-to-many with Message (read receipts via seenMessages)
+ * 
+ * Authentication Integration:
+ * - Supports both credential-based and OAuth authentication
+ * - Integrates with NextAuth.js PrismaAdapter
+ * - Handles email verification and password hashing
+ * 
+ * Real-time Messaging Features:
+ * - Tracks which conversations a user participates in
+ * - Manages read receipts for message visibility
+ * - Stores user profile data for display in conversations
+ */
 model User {
+  /**
+   * Primary Key - MongoDB ObjectId
+   * 
+   * Uses MongoDB's native ObjectId for optimal performance and compatibility.
+   * The @map("_id") directive ensures compatibility with MongoDB's default
+   * primary key naming convention.
+   */
   id String @id @default(auto()) @map("_id") @db.ObjectId
+  
+  /**
+   * User Display Name
+   * 
+   * Optional display name shown in conversations and user lists.
+   * Falls back to email if not provided, ensuring users always have
+   * an identifiable name in the messaging interface.
+   */
   name String?
+  
+  /**
+   * Email Address - Unique Identifier
+   * 
+   * Primary identifier for user accounts. Used for:
+   * - Authentication and login
+   * - Pusher channel subscriptions for real-time updates
+   * - User identification in conversations
+   * - Password reset and account recovery
+   */
   email String? @unique
+  
+  /**
+   * Email Verification Timestamp
+   * 
+   * Tracks when the user's email was verified. This is important for:
+   * - Ensuring valid email addresses for account recovery
+   * - Preventing spam and fake accounts
+   * - Required by NextAuth.js for OAuth providers
+   */
   emailVerified DateTime?
+  
+  /**
+   * Profile Image URL
+   * 
+   * Stores the URL to the user's profile picture. Can be:
+   * - OAuth provider profile image (Google, GitHub)
+   * - User-uploaded image stored in Cloudinary
+   * - Default avatar if not provided
+   * 
+   * Used in Avatar components throughout the messaging interface.
+   */
   image String?
+  
+  /**
+   * Hashed Password for Credential Authentication
+   * 
+   * Stores bcrypt-hashed passwords for users who sign up with email/password.
+   * Only populated for credential-based authentication; OAuth users have null.
+   * 
+   * Security considerations:
+   * - Never stored in plain text
+   * - Uses bcrypt for secure hashing
+   * - Required for credential provider authentication
+   */
   hashedPassword String?
+  
+  /**
+   * Account Creation Timestamp
+   * 
+   * Tracks when the user account was created. Useful for:
+   * - Account age verification
+   * - User analytics and engagement tracking
+   * - Debugging and support purposes
+   */
   createdAt DateTime @default(now())
+  
+  /**
+   * Last Update Timestamp
+   * 
+   * Automatically updated whenever user data changes. Helps with:
+   * - Cache invalidation strategies
+   * - Data synchronization
+   * - Audit trails for user modifications
+   */
   updatedAt DateTime @updatedAt
 
+  /**
+   * Conversation Participation Tracking
+   * 
+   * Array of conversation IDs that this user participates in. This enables:
+   * - Fast lookup of user's conversations
+   * - Efficient conversation list generation
+   * - Real-time conversation updates via Pusher
+   * 
+   * The many-to-many relationship allows users to be in multiple conversations
+   * while maintaining referential integrity.
+   */
   conversationIds String[] @db.ObjectId
   conversations Conversation[] @relation(fields: [conversationIds], references: [id])
 
+  /**
+   * Message Read Receipts
+   * 
+   * Tracks which messages this user has seen. This enables:
+   * - Read receipt functionality in conversations
+   * - Unread message counts and indicators
+   * - Message status tracking (sent, delivered, read)
+   * 
+   * The many-to-many relationship allows efficient querying of read status
+   * across all messages in a conversation.
+   */
   seenMessageIds String[] @db.ObjectId
   seenMessages Message[] @relation("Seen", fields: [seenMessageIds], references: [id])
 
+  /**
+   * OAuth Account Connections
+   * 
+   * Links to external OAuth provider accounts (Google, GitHub). This enables:
+   * - Multiple sign-in methods per user
+   * - Account linking and merging
+   * - OAuth token management for API access
+   * 
+   * Managed automatically by NextAuth.js PrismaAdapter.
+   */
   accounts Account[]
+  
+  /**
+   * Messages Sent by This User
+   * 
+   * One-to-many relationship with messages this user has sent. Enables:
+   * - User message history and analytics
+   * - Message attribution in conversations
+   * - User activity tracking and moderation
+   */
   messages Message[]
 }
 
+/**
+ * Account Model - OAuth Provider Connections
+ * 
+ * Manages connections to external OAuth providers (Google, GitHub) and credential
+ * authentication. This model is essential for NextAuth.js integration and allows
+ * users to sign in with multiple methods.
+ * 
+ * Key Features:
+ * - Supports multiple OAuth providers per user
+ * - Stores provider-specific tokens and metadata
+ * - Handles token refresh and expiration
+ * - Enables account linking and merging
+ * 
+ * Security Considerations:
+ * - Tokens are stored securely in the database
+ * - Cascade delete ensures cleanup when users are deleted
+ * - Unique constraints prevent duplicate provider accounts
+ */
 model Account {
+  /**
+   * Primary Key - MongoDB ObjectId
+   * 
+   * Unique identifier for each account connection. Uses MongoDB ObjectId
+   * for consistency with other models and optimal performance.
+   */
   id String @id @default(auto()) @map("_id") @db.ObjectId
+  
+  /**
+   * User Reference
+   * 
+   * Links this account to a specific user. The cascade delete ensures
+   * that when a user is deleted, all their OAuth accounts are also removed.
+   */
   userId String @db.ObjectId
+  
+  /**
+   * Account Type
+   * 
+   * Specifies the type of account connection:
+   * - "oauth" for OAuth providers (Google, GitHub)
+   * - "credentials" for email/password authentication
+   * 
+   * Used by NextAuth.js to determine authentication flow and token handling.
+   */
   type String
+  
+  /**
+   * OAuth Provider Name
+   * 
+   * Identifies the specific OAuth provider:
+   * - "google" for Google OAuth
+   * - "github" for GitHub OAuth
+   * - "credentials" for email/password
+   * 
+   * Used for provider-specific token handling and user identification.
+   */
   provider String
+  
+  /**
+   * Provider Account ID
+   * 
+   * The unique identifier for this account within the OAuth provider's system.
+   * Combined with provider, this creates a unique constraint to prevent
+   * duplicate account connections.
+   */
   providerAccountId String
+  
+  /**
+   * OAuth Refresh Token
+   * 
+   * Long-lived token used to obtain new access tokens without user interaction.
+   * Essential for maintaining authenticated sessions with OAuth providers.
+   * 
+   * Security: Stored securely and used only for token refresh operations.
+   */
   refresh_token String? @db.String
+  
+  /**
+   * OAuth Access Token
+   * 
+   * Short-lived token used for API calls to the OAuth provider. Used for:
+   * - Fetching user profile information
+   * - Accessing provider-specific APIs
+   * - Maintaining authenticated sessions
+   * 
+   * Security: Automatically refreshed using refresh_token when expired.
+   */
   access_token String? @db.String
+  
+  /**
+   * Token Expiration Timestamp
+   * 
+   * Unix timestamp indicating when the access token expires. Used for:
+   * - Automatic token refresh before expiration
+   * - Session management and cleanup
+   * - Preventing API calls with expired tokens
+   */
   expires_at Int?
+  
+  /**
+   * Token Type
+   * 
+   * Specifies the type of OAuth token (typically "Bearer"). Used for
+   * proper token formatting in API requests to OAuth providers.
+   */
   token_type String?
+  
+  /**
+   * OAuth Scope
+   * 
+   * Defines the permissions granted by the user to our application.
+   * Common scopes include profile, email, and other provider-specific permissions.
+   */
   scope String?
+  
+  /**
+   * ID Token (JWT)
+   * 
+   * JWT token containing user identity information. Used for:
+   * - User identification and profile data
+   * - Token validation and verification
+   * - Single Sign-On (SSO) functionality
+   */
   id_token String? @db.String
+  
+  /**
+   * Session State
+   * 
+   * OAuth 2.0 session state parameter used for security and CSRF protection.
+   * Helps prevent cross-site request forgery attacks during OAuth flows.
+   */
   session_state String?
 
+  /**
+   * User Relationship
+   * 
+   * Links this account to the user who owns it. Cascade delete ensures
+   * that when a user is deleted, all their OAuth accounts are also removed.
+   */
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  /**
+   * Unique Constraint - Provider + Account ID
+   * 
+   * Ensures that each OAuth provider account can only be linked to one user.
+   * This prevents duplicate account connections and maintains data integrity.
+   */
   @@unique([provider, providerAccountId])
 }
 
+/**
+ * Conversation Model - Chat Room Management
+ * 
+ * Represents chat rooms in our messaging application. Supports both direct
+ * one-on-one conversations and group conversations with multiple participants.
+ * 
+ * Key Features:
+ * - Flexible participant management (direct and group chats)
+ * - Message threading and organization
+ * - Real-time updates via Pusher
+ * - Conversation metadata and settings
+ * 
+ * Real-time Integration:
+ * - Last message timestamp for conversation ordering
+ * - Participant management for real-time notifications
+ * - Message count and status tracking
+ */
 model Conversation {
+  /**
+   * Primary Key - MongoDB ObjectId
+   * 
+   * Unique identifier for each conversation. Used in:
+   * - URL routing (/conversations/[conversationId])
+   * - Pusher channel subscriptions
+   * - Message association and threading
+   */
   id String @id @default(auto()) @map("_id") @db.ObjectId
+  
+  /**
+   * Conversation Creation Timestamp
+   * 
+   * Records when the conversation was created. Used for:
+   * - Conversation ordering and display
+   * - Analytics and user engagement tracking
+   * - Debugging and support purposes
+   */
   createdAt DateTime @default(now())
+  
+  /**
+   * Last Message Timestamp
+   * 
+   * Tracks when the most recent message was sent. This is crucial for:
+   * - Conversation list ordering (most recent first)
+   * - Real-time conversation updates
+   * - Unread message indicators
+   * - Conversation activity tracking
+   * 
+   * Updated automatically when new messages are added to the conversation.
+   */
   lastMessageAt DateTime @default(now())
+  
+  /**
+   * Group Conversation Name
+   * 
+   * Display name for group conversations. Only used when isGroup is true.
+   * For direct conversations, this remains null and participants' names
+   * are used for display purposes.
+   */
   name String?
+  
+  /**
+   * Group Conversation Flag
+   * 
+   * Determines if this is a group conversation or direct message:
+   * - true: Group conversation with multiple participants
+   * - false: Direct one-on-one conversation
+   * 
+   * Affects UI display, notification behavior, and conversation management.
+   */
   isGroup Boolean?
 
+  /**
+   * Message Threading
+   * 
+   * Array of message IDs belonging to this conversation. Enables:
+   * - Efficient message retrieval and pagination
+   * - Message ordering and threading
+   * - Real-time message updates
+   * 
+   * The one-to-many relationship with Message model provides
+   * referential integrity and efficient querying.
+   */
   messagesIds String[] @db.ObjectId
   messages Message[]
 
+  /**
+   * Conversation Participants
+   * 
+   * Array of user IDs participating in this conversation. Supports:
+   * - Direct conversations (2 participants)
+   * - Group conversations (3+ participants)
+   * - Dynamic participant management
+   * 
+   * The many-to-many relationship allows efficient participant
+   * queries and real-time presence updates.
+   */
   userIds String[] @db.ObjectId
   users User[] @relation(fields: [userIds], references:[id])
 }
 
+/**
+ * Message Model - Individual Chat Messages
+ * 
+ * Represents individual messages within conversations. Supports text messages,
+ * image attachments, and read receipt tracking for real-time messaging.
+ * 
+ * Key Features:
+ * - Text and image message support
+ * - Read receipt tracking
+ * - Message threading and ordering
+ * - Real-time delivery and updates
+ * 
+ * Real-time Integration:
+ * - Pusher events for message delivery
+ * - Read receipt updates
+ * - Message status tracking
+ */
 model Message {
+  /**
+   * Primary Key - MongoDB ObjectId
+   * 
+   * Unique identifier for each message. Used for:
+   * - Message identification and referencing
+   * - Read receipt tracking
+   * - Real-time message updates
+   * - Message threading and replies
+   */
   id String @id @default(auto()) @map("_id") @db.ObjectId
+  
+  /**
+   * Message Text Content
+   * 
+   * The actual text content of the message. Can be:
+   * - Plain text messages
+   * - Markdown-formatted text
+   * - Empty for image-only messages
+   * 
+   * Supports rich text formatting and emoji in the messaging interface.
+   */
   body String?
+  
+  /**
+   * Image Attachment URL
+   * 
+   * URL to image attachments stored in Cloudinary. Supports:
+   * - Image messages without text
+   * - Text messages with image attachments
+   * - Multiple image formats (JPEG, PNG, WebP)
+   * 
+   * Images are automatically optimized and resized by Cloudinary
+   * for optimal performance and bandwidth usage.
+   */
   image String?
+  
+  /**
+   * Message Creation Timestamp
+   * 
+   * Records when the message was sent. Used for:
+   * - Message ordering within conversations
+   * - Real-time message delivery
+   * - Message history and pagination
+   * - User activity tracking
+   */
   createdAt DateTime @default(now())
 
+  /**
+   * Read Receipt Tracking
+   * 
+   * Array of user IDs who have seen this message. Enables:
+   * - Read receipt functionality
+   * - Unread message indicators
+   * - Message status tracking (sent, delivered, read)
+   * 
+   * The many-to-many relationship allows efficient querying of
+   * read status across all participants in a conversation.
+   */
   seenIds String[] @db.ObjectId
   seen User[] @relation("Seen", fields: [seenIds], references: [id])
 
+  /**
+   * Conversation Reference
+   * 
+   * Links this message to its parent conversation. Cascade delete ensures
+   * that when a conversation is deleted, all its messages are also removed.
+   * 
+   * Essential for message threading and conversation organization.
+   */
   conversationId String @db.ObjectId
   conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
 
+  /**
+   * Message Sender Reference
+   * 
+   * Identifies the user who sent this message. Cascade delete ensures
+   * that when a user is deleted, all their messages are also removed.
+   * 
+   * Used for message attribution, user activity tracking, and
+   * real-time presence updates.
+   */
   senderId String @db.ObjectId
   sender User @relation(fields: [senderId], references: [id], onDelete: Cascade)
 }

@@ -1,7 +1,128 @@
+/**
+ * Global CSS Configuration for Dex Real-Time Messenger
+ * 
+ * This file defines the global CSS foundation for our Next.js 14 real-time
+ * messaging application. It imports Tailwind CSS directives and establishes
+ * essential layout rules that ensure proper full-height layout behavior
+ * across all components and pages.
+ * 
+ * Key Features:
+ * - Tailwind CSS base, components, and utilities imports
+ * - Full-height layout foundation for messaging interface
+ * - Global styling foundation for consistent UI behavior
+ * - Integration with PostCSS and Tailwind configuration
+ * 
+ * Layout Foundation:
+ * - html, body, :root height: 100% ensures full viewport height
+ * - Enables proper flexbox and grid layouts throughout the app
+ * - Supports responsive design patterns and mobile-first approach
+ * - Provides consistent height behavior across all components
+ * 
+ * This CSS foundation is essential for our messaging app because it provides
+ * the layout infrastructure that enables proper full-height messaging interfaces,
+ * responsive design, and consistent styling across all pages and components.
+ * 
+ * @fileoverview Global CSS configuration for Next.js 14 real-time messaging application
+ * @author Dayle Cortes
+ * @since 2025
+ */
+
+/**
+ * Tailwind CSS Base Layer
+ * 
+ * Imports Tailwind's base styles, which include CSS reset, normalize, and
+ * foundational styles. This layer provides the base styling foundation
+ * that ensures consistent cross-browser behavior and removes default
+ * browser styling inconsistencies.
+ * 
+ * What it includes:
+ * - CSS reset and normalize styles
+ * - Base typography and form element styling
+ * - Consistent box-sizing and margin/padding resets
+ * - Cross-browser compatibility fixes
+ * 
+ * Why this matters for our messaging app:
+ * - Ensures consistent appearance across all browsers
+ * - Provides clean foundation for our custom components
+ * - Removes browser-specific styling inconsistencies
+ * - Enables predictable layout behavior for messaging UI
+ */
 @tailwind base;
+
+/**
+ * Tailwind CSS Components Layer
+ * 
+ * Imports Tailwind's component layer, which includes pre-built component
+ * styles and utilities. This layer provides reusable component patterns
+ * and enhanced form styling that works seamlessly with our React components.
+ * 
+ * What it includes:
+ * - Pre-built component styles and patterns
+ * - Enhanced form styling (via @tailwindcss/forms plugin)
+ * - Button, input, and form element styling
+ * - Reusable UI component foundations
+ * 
+ * Why this matters for our messaging app:
+ * - Provides consistent form styling for authentication and message input
+ * - Enables rapid UI development with pre-built patterns
+ * - Ensures accessible and beautiful form components
+ * - Maintains design consistency across all UI elements
+ */
 @tailwind components;
+
+/**
+ * Tailwind CSS Utilities Layer
+ * 
+ * Imports Tailwind's utility classes, which provide atomic CSS utilities
+ * for rapid UI development. This layer includes all the utility classes
+ * we use throughout our messaging application for spacing, colors, typography,
+ * and responsive design.
+ * 
+ * What it includes:
+ * - Spacing utilities (padding, margin, gap)
+ * - Color utilities (text, background, border colors)
+ * - Typography utilities (font size, weight, line height)
+ * - Layout utilities (flexbox, grid, positioning)
+ * - Responsive design utilities (breakpoint prefixes)
+ * 
+ * Why this matters for our messaging app:
+ * - Enables rapid UI development with utility-first approach
+ * - Provides consistent spacing and color system
+ * - Supports responsive design for mobile and desktop
+ * - Maintains design system consistency across components
+ */
 @tailwind utilities;
 
+/**
+ * Full-Height Layout Foundation
+ * 
+ * Establishes the essential height foundation for our messaging application.
+ * This rule ensures that html, body, and :root elements take up the full
+ * viewport height, enabling proper full-height layouts throughout our app.
+ * 
+ * Why height: 100%?
+ * - Enables full-height messaging interfaces
+ * - Supports proper flexbox and grid layouts
+ * - Ensures consistent height behavior across components
+ * - Provides foundation for responsive design patterns
+ * 
+ * How it works:
+ * - html: Sets the root element to full viewport height
+ * - body: Inherits full height from html element
+ * - :root: CSS custom property root also gets full height
+ * - This creates a consistent height foundation for all child elements
+ * 
+ * Usage in components:
+ * - Sidebar: Uses h-full for full-height sidebar layout
+ * - Conversation pages: Uses h-full for full-height chat interface
+ * - Modal components: Uses min-h-full for proper modal centering
+ * - Empty states: Uses h-full for proper centering and layout
+ * 
+ * This foundation is crucial for our messaging app because it enables
+ * proper full-height layouts that are essential for messaging interfaces,
+ * ensuring that chat windows, sidebars, and content areas utilize the
+ * full available viewport height for optimal user experience.
+ */
 html,
 body,
 :root {
