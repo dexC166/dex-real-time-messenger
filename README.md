@@ -69,7 +69,7 @@ It delivers instant chat, read receipts, media sharing, and presence indicators 
 | **Auth**               | NextAuth (Credentials, Google, GitHub) |
 | **Storage / CDN**      | Cloudinary                             |
 | **Forms / Validation** | React-Hook-Form                        |
-| **State**              | Zustand                                |
+| **State**              | Zustand (minimal global state)         |
 | **Notifications**      | react-hot-toast                        |
 | **Build / Deploy**     | Vercel                                 |
 
@@ -199,6 +199,7 @@ GOOGLE_CLIENT_SECRET=
 NEXT_PUBLIC_PUSHER_APP_KEY=
 PUSHER_APP_ID=
 PUSHER_SECRET=
+PUSHER_CLUSTER="mt1"
 ```
 
 ### 📦 Installation
@@ -261,8 +262,8 @@ npm run dev
 
 ## 📚 Documentation
 
-- 🛠️ [Architecture Overview](./architecture.md)
-- 🔄 [User Flow Diagram](./flowchart.md)
+- 🏗️ [Architecture Overview](./architecture.md)
+- 🗺️ [User Flow Diagram](./flowchart.md)
 - 📖 [Code Documentation](#code-documentation)
 
 ### 📖 Code Documentation

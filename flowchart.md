@@ -1,12 +1,15 @@
-# 🔄 Dex Messenger User Flow
+# 🗺️ Feature/User Flowchart
 
-This document outlines the detailed user journey and message lifecycle in the **Dex Messenger** application. It walks through every step from login to real-time-message delivery, highlighting the behind-the-scenes mechanics and architecture integrations.
+## Micro-level: Seamless User Journey from Sign-in to Messaging
+
+This document visualizes the **step-by-step flow** of a typical user journey in the Dex-Real-Time-Messenger platform.  
+It represents how users interact with the product from landing, authentication, user selection, conversation management, and real-time messaging to account settings, mirroring the real experience and helping developers/designers optimize for each interaction.
 
 ---
 
 ## 📑 Table of Contents
 
-- 📱 [Authentication & Messaging Flow](#authentication-messaging-flow)
+- 🔄 [User Interaction Flow](#user-interaction-flow)
 - 🔐 [Authentication Flow Breakdown](#authentication-flow-breakdown)
 - 💬 [Messaging Flow Breakdown](#messaging-flow-breakdown)
 - 🧪 [Technical Implementation Highlights](#technical-implementation-highlights)
@@ -14,13 +17,99 @@ This document outlines the detailed user journey and message lifecycle in the **
 
 ---
 
-<a name="authentication-messaging-flow"></a>
+<a name="user-interaction-flow"></a>
 
-## 📱 Authentication & Messaging Flow
+### 🔄 User Interaction Flow
 
-The diagram below visualizes the high-level application flow — starting from user entry and ending with message delivery and read receipts.
+```mermaid
+graph TD
+    A[User Visits Site /] --> B{Authenticated?}
+    B -->|No| C[Landing Page /]
+    B -->|Yes| D[Users Page /users]
 
-## <img src="./public/images/diagrams/flowchart.png"  alt="User Flow Diagram" width="500"/>
+    C --> E[Click Sign In]
+    E --> F[Auth Page /]
+
+    F --> G{Login or Register?}
+    G -->|Login| H[Submit Credentials]
+    G -->|Register| I[Create Account]
+    G -->|OAuth| J[GitHub/Google OAuth]
+
+    H --> K{Auth Success?}
+    I --> K
+    J --> K
+
+    K -->|No| L[Show Error]
+    L --> F
+    K -->|Yes| D
+
+    D --> M[User List Display]
+    M --> N{User Action?}
+    N -->|Select User| O[Create/Open Conversation]
+    N -->|Search Users| P[Filter User List]
+
+    O --> Q[Conversation Page /conversations/id]
+
+    Q --> R[Load Messages]
+    R --> S[Real-Time Subscription]
+
+    S --> T{User Action?}
+    T -->|Type Message| U[Compose Message]
+    T -->|Upload Image| V[Cloudinary Upload]
+    T -->|View Profile| W[Profile Drawer]
+    T -->|Delete Conversation| X[Confirm Modal]
+
+    U --> Y[Send Message]
+    V --> Y
+    Y --> Z[API: POST /api/messages]
+    Z --> AA[Pusher Broadcast]
+    AA --> AB[Real-Time Delivery]
+    AB --> S
+
+    W --> S
+    X --> AC[Delete Conversation]
+    AC --> D
+
+    Q --> AD[Sidebar Navigation]
+    AD --> AE{Navigation Action?}
+    AE -->|Settings| AF[Settings Modal]
+    AE -->|Users| D
+    AE -->|Logout| AG[Sign Out]
+
+    AF --> Q
+    AG --> A
+
+    style A fill:#2563eb,color:#ffffff
+    style D fill:#059669,color:#ffffff
+    style F fill:#ca8a04,color:#ffffff
+    style Q fill:#dc2626,color:#ffffff
+    style AA fill:#f59e0b,color:#ffffff
+```
+
+---
+
+### 📝 Flow Steps (Text Summary)
+
+- **User Visits Site** (`/`)
+- -> **Landing Page** (if not authenticated)
+  - -> **Sign In / Register** (`/`)
+    - If authentication **fails**, show error
+    - If successful, continue:
+- -> **Users Page** (`/users`)
+  - **User List** (All users except current user)
+  - **Search/Filter** functionality
+    - Clicking user opens **Existing Conversation** or **Creates New**
+- -> **Conversation Page** (`/conversations/[id]`)
+  - **Message List** (Previous messages with sender info)
+  - **Real-Time Subscription** (Pusher channel for live updates)
+  - **Message Composition** (Text input with image upload)
+    - **Send Message** ➡️ **API Call** ➡️ **Pusher Broadcast** ➡️ **Real-Time Delivery**
+  - **Profile Drawer** (View conversation/user details)
+  - **Delete Conversation** (Confirmation modal)
+  - **Sidebar Navigation**
+    - **Settings** (Update profile, avatar)
+    - **Back to Users**
+    - **Logout**
 
 ---
 
@@ -30,31 +119,36 @@ The diagram below visualizes the high-level application flow — starting from u
 
 ### 1. Application Access
 
-- The user opens the app via browser or mobile.
-- This triggers the initial load of the Next.js app.
+- The user opens the app via browser or mobile
+- Middleware checks authentication status (`middleware.ts`)
+- Unauthenticated users are redirected to landing page
 
 ### 2. Login Screen Displayed
 
-- The user is presented with two login methods:
-  - **Email/Password (Credentials)**
-  - **OAuth** (Google or GitHub)
+- Landing page (`/`) displays authentication form
+- The user is presented with multiple login methods:
+  - **Email/Password (Credentials)** - Traditional login
+  - **OAuth** (Google or GitHub) - One-click social authentication
 
 ### 3. Login Method Selected
 
-- For **credentials**: User inputs email + password.
-- For **OAuth**: User is redirected to the provider's login page.
+- For **credentials**: User inputs email + password, form validates and submits
+- For **OAuth**: User is redirected to the provider's login page (Google/GitHub)
+- Registration creates new user with bcrypt-hashed password
 
 ### 4. Verification
 
-- **Credentials**: Password is compared against hashed record in the DB.
-- **OAuth**: External provider validates the token and returns user info.
+- **Credentials**: Password is compared against hashed record in the DB using bcrypt
+- **OAuth**: External provider validates the token and returns user info
+- NextAuth.js handles the authentication flow via `/api/auth/[...nextauth]`
 
 ### 5. Session Initialization
 
 - On success:
-  - A secure **JWT** is generated.
-  - Session is established via **NextAuth.js**.
-  - **HTTP-only cookies** are set for session persistence.
+  - A secure **JWT** is generated by NextAuth.js
+  - Session is established and stored in **HTTP-only cookies**
+  - User data is stored/updated in MongoDB via Prisma
+  - User is redirected to `/users` page
 
 ---
 
@@ -62,65 +156,90 @@ The diagram below visualizes the high-level application flow — starting from u
 
 ## 💬 Messaging Flow Breakdown
 
-### 6. Dashboard View
+### 6. Users Page View
 
-- After login, the user sees:
-  - Conversation list
-  - Active user indicators
-  - Navigation options (profile, new chat)
+- After login, the user sees `/users` page with:
+  - Complete user list (excluding current user)
+  - Active user indicators (green dots via Pusher presence)
+  - Sidebar navigation (settings, logout)
+  - Search/filter functionality
 
-### 7. Conversation Actions
+### 7. Conversation Initiation
 
 User can:
 
-- **Start a new conversation** (individual or group)
-- **Select existing conversation** to continue chatting
+- **Select existing user** to open existing conversation or create new one-on-one
+- **Create group conversation** (via GroupChatModal)
+  - Select multiple users
+  - Set group name and avatar
+- System checks for existing conversations to avoid duplicates
 
-### 8. New Conversation Setup
+### 8. Conversation Page Display
 
-If creating a new conversation:
+When entering a conversation (`/conversations/[id]`):
 
-- Recipients are selected
-- Optional: group chat name and avatar are configured
+- **Header**: Displays conversation name, participant info, online status
+- **Message List**: Previous messages fetched via `getMessages` server action
+- **Real-Time Subscription**: Pusher channel (`conversationId`) is subscribed
+- **Message Form**: Text input with image upload button
+- **Sidebar**: Navigation remains available
 
-### 9. Chat Interface Displayed
+### 9. Real-Time Setup
 
-- Previous messages are fetched from MongoDB
-- Read receipts and online status are shown
+- Pusher client subscribes to `conversation-[id]` channel
+- Listens for `messages:new` events for real-time message delivery
+- Presence tracking via `presence-dex-messenger` channel
+- Active users list updated via `useActiveList` Zustand store
 
 ### 10. Composing a Message
 
-- User enters text and/or attaches media via **Cloudinary**
-- Messages are composed using a rich input box
+- User enters text in message input or clicks image upload
+- **Image Upload**: Opens Cloudinary widget, returns image URL
+- **Text Input**: React Hook Form manages form state and validation
+- Form prepares message data (body and/or image)
 
 ### 11. Sending the Message
 
-- Message undergoes client-side validation
-- **Optimistic UI** updates: message shows instantly in the UI
-- Request is sent to the backend via API
+- Form submits to `/api/messages` with conversationId, message, and optional image
+- **Optimistic UI**: Message appears instantly in sender's UI (not implemented by default)
+- Request includes authentication via NextAuth session
 
 ### 12. Backend Message Handling
 
-- Message is validated and stored in MongoDB via **Prisma**
-- It’s associated with the sender and conversation thread
+- API route (`/api/messages/route.ts`) validates authentication
+- Message is created in MongoDB via Prisma with:
+  - `senderId`: Current user
+  - `conversationId`: Target conversation
+  - `seen`: Initially marked as seen by sender only
+  - `body`: Text content (optional)
+  - `image`: Cloudinary URL (optional)
+- Retry logic handles transaction conflicts (P2034 error)
+- Conversation `lastMessageAt` timestamp is updated
 
 ### 13. Real-Time Push Trigger
 
-- Once stored:
-  - A **Pusher event** is broadcast to the conversation channel
-  - Payload includes message data
+- Once message is stored:
+  - **Pusher event** `messages:new` is broadcast to conversation channel
+  - Payload includes complete message data with sender info
+  - **Pusher event** `conversation:update` is sent to each participant's user channel
+  - Updates conversation list for all participants
 
 ### 14. Message Delivery to Participants
 
-- **If online**: They receive the message in real time via active Pusher subscription
-- **If offline**: Message appears on next conversation load
+- **If online**: Message is received instantly via Pusher subscription
+  - Body component binds to `messages:new` event
+  - Message is added to local state and rendered
+  - Scroll to bottom of message list
+- **If offline**: Message appears on next page load via server action
 
 ### 15. Read Receipt Handling
 
-- Upon viewing:
-  - "Seen" status is updated in the DB
-  - **Pusher event** broadcasts the update
-  - UI reflects the read status for all participants
+- When user views conversation:
+  - API call to `/api/conversations/[id]/seen` marks messages as seen
+  - `seenIds` array updated in MongoDB for messages
+  - **Pusher event** `conversation:update` broadcasts read status
+  - UI shows read receipts (avatars) for all participants who've seen
+  - Last seen timestamp updates in conversation list
 
 ---
 
@@ -131,21 +250,53 @@ If creating a new conversation:
 ### Authentication
 
 - Powered by **NextAuth.js**: `app/api/auth/[...nextauth]/route.ts`
-- Credentials are hashed with **bcrypt**
-- OAuth handled via official provider SDKs
+- Configuration in `app/libs/authOptions.ts`
+- Credentials are hashed with **bcrypt** (12 salt rounds)
+- OAuth handled via official provider SDKs (Google, GitHub)
+- JWT-based session management with HTTP-only cookies
+- Middleware protection: `middleware.ts` guards `/users` and `/conversations` routes
+- Pusher channel authorization: `pages/api/pusher/auth.ts`
+
+### User Management
+
+- Server actions for data fetching:
+  - `getCurrentUser`: Session validation and user lookup
+  - `getUsers`: Fetch all users except current user
+  - `getConversations`: Fetch user's conversations with last message
+  - `getConversationById`: Fetch specific conversation with participants
+  - `getMessages`: Fetch conversation messages with pagination
+- User presence tracking via Pusher presence channels
+- `useActiveList` Zustand store for global active users state
+- `useActiveChannel` hook manages presence channel subscription
+
+### Conversation Management
+
+- API routes:
+  - `POST /api/conversations`: Create new conversation (1-on-1 or group)
+  - `DELETE /api/conversations/[id]`: Delete conversation
+  - `POST /api/conversations/[id]/seen`: Mark messages as seen
+- Duplicate conversation prevention for 1-on-1 chats
+- Group conversations support multiple participants with custom names
+- Conversation list sorted by `lastMessageAt` timestamp
 
 ### Messaging
 
-- API routes: `app/api/messages/route.ts`
+- API route: `POST /api/messages`
 - DB interactions via **Prisma Message** model
-- Real-time layer uses **Pusher** events
-- Optimistic UI improves user responsiveness
+- Retry logic with exponential backoff for transaction conflicts (P2034)
+- Real-time layer uses **Pusher** events:
+  - `messages:new`: Broadcast to conversation channel
+  - `conversation:update`: Broadcast to each user's personal channel
+- Image uploads handled by **Cloudinary** via `next-cloudinary` widget
+- Message composition with **React Hook Form**
 
 ### Read Receipts
 
 - Tracked via `app/api/conversations/[conversationId]/seen/route.ts`
-- Uses a many-to-many relation (User ↔ Seen ↔ Message)
-- Real-time updates pushed with Pusher
+- Uses a many-to-many relation (User ↔ Seen ↔ Message via `seenIds`)
+- Real-time updates pushed with Pusher `conversation:update` events
+- Avatar display shows who has seen messages
+- Automatic read status when viewing conversation
 
 ---
 
@@ -153,12 +304,40 @@ If creating a new conversation:
 
 ## 🚀 Performance Optimizations
 
-| Optimization             | Description                                                                |
-| ------------------------ | -------------------------------------------------------------------------- |
-| **Pagination**           | Loads messages in chunks to avoid long load times                          |
-| **Optimistic UI**        | Instant feedback by showing the message before server confirmation         |
-| **Selective Fetching**   | Only loads messages for the currently active conversation                  |
-| **Scoped Pusher Events** | Events are sent only to relevant users/conversations for bandwidth savings |
+| Optimization                 | Description                                                                                  |
+| ---------------------------- | -------------------------------------------------------------------------------------------- |
+| **Server Actions**           | Direct database queries from server components, eliminating unnecessary API routes           |
+| **Selective Data Fetching**  | Only loads messages for the currently active conversation, not all conversations             |
+| **Pusher Channel Scoping**   | Events are sent only to relevant users/conversations for bandwidth savings                   |
+| **Presence Channel Caching** | Single presence channel subscription shared across app via `useActiveChannel`                |
+| **Message Retry Logic**      | Exponential backoff for transaction conflicts ensures eventual consistency                   |
+| **Image Optimization**       | Cloudinary handles image optimization, resizing, and CDN delivery                            |
+| **TypeScript Type Safety**   | Prisma generates types, eliminating runtime type errors and enabling compile-time validation |
+| **Zustand Minimal State**    | Only active users list in global state; everything else is server-driven or local            |
+| **MongoDB Array Operations** | Efficient array operations for conversation participants and message read receipts           |
+| **Next.js App Router**       | Server components by default, client components only where needed                            |
+
+---
+
+## 💡 Why This Flowchart?
+
+This flowchart gives the team and newcomers an "at-a-glance" reference of how a user travels through the app. It supports planning for UI/UX, testing, features, and onboarding documentation.
+
+The detailed breakdown ensures developers understand:
+
+- **Authentication flow**: Multi-provider auth with NextAuth.js
+- **Real-time mechanics**: Pusher channel subscriptions and event handling
+- **Data flow**: Server actions, API routes, and database operations
+- **User experience**: From landing to messaging to navigation
+- **Technical implementation**: Specific files and patterns used
+
+This documentation is valuable for:
+
+- Onboarding new developers
+- Planning feature additions
+- Understanding system behavior
+- Debugging issues
+- Architectural decision-making
 
 ---
 
