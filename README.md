@@ -17,6 +17,7 @@ A full-featured, real-time chat platform built with **Next.js 14 (App Router)** 
 
 ## 📑 Table of Contents
 
+- ✨ [Project Highlights](#project-highlights)
 - 📌 [Project Overview](#project-overview)
 - 🛠️ [Tech Stack](#tech-stack)
 - 📦 [package.json at a Glance](#packagejson-at-a-glance)
@@ -33,9 +34,39 @@ A full-featured, real-time chat platform built with **Next.js 14 (App Router)** 
 
 ---
 
-<a name="project-overview"></a>
+## <a name="project-highlights">✨ Project Highlights</a>
 
-## 📌 Project Overview
+- **`Built from Scratch`**: 100% coded from the ground up to learn the full-stack messaging architecture with guidance from "codewithantonio."
+
+- **`Modern PERN Stack`**: Next.js 14 (App Router), React 18, MongoDB, Prisma ORM for enterprise-level type safety and server-side rendering.
+
+- **`Styling`**: Tailwind CSS + Headless UI for responsive and accessible UIs optimized for all screen sizes.
+
+- **`Global State`**: Zustand for lightning-fast client state management with minimal boilerplate.
+
+- **`Security`**: NextAuth.js, bcrypt, CORS, and JWT session-based authentication with OAuth providers (Google, GitHub).
+
+- **`Real-Time Messaging`**: Pusher channels enable instant message delivery, presence tracking, and live conversation updates.
+
+- **`DB Integration`**: MongoDB managed via Prisma ORM with comprehensive schema documentation and type-safe operations.
+
+- **`DX`**: Structured error handling on both frontend and backend for real-world readiness and great dev experience.
+
+- **`Front-to-Back Ownership`**: Every line written was part of my step-by-step growth in full-stack architecture.
+
+- **`Beyond Tutorial Learning`**: Started with codewithantonio's guidance but evolved through my own implementation, experimentation, and customization.
+
+- **`📚 Production-Ready Documentation`**: Comprehensive JSDoc comments throughout the entire codebase with mentoring tone, explaining the "why" behind every code decision.
+
+- **`🎓 Educational Codebase`**: Context-aware documentation serves as learning resource for understanding modern full-stack development patterns.
+
+- **`Beginner Friendly`**: Clean code, clear structure, plenty of learning opportunities in authentication, real-time features, and database design.
+
+- **`Deployment Ready`**: Multiple deployment options with detailed guides for Vercel hosting and environment setup.
+
+---
+
+## <a name="project-overview">📌 Project Overview</a>
 
 This is **my** implementation of a Facebook-style messenger.  
 It delivers instant chat, read receipts, media sharing, and presence indicators all wrapped in a sleek, responsive UI.
@@ -55,9 +86,7 @@ It delivers instant chat, read receipts, media sharing, and presence indicators 
 
 ---
 
-<a name="tech-stack"></a>
-
-## 🛠️ Tech Stack
+## <a name="tech-stack">🛠️ Tech Stack</a>
 
 | Layer / Purpose        | Technology                             |
 | ---------------------- | -------------------------------------- |
@@ -75,9 +104,7 @@ It delivers instant chat, read receipts, media sharing, and presence indicators 
 
 ---
 
-<a name="packagejson-at-a-glance"></a>
-
-## 📦 `package.json` at a Glance
+## <a name="packagejson-at-a-glance">📦 `package.json` at a Glance</a>
 
 ### Major Runtime Dependencies
 
@@ -157,9 +184,7 @@ It delivers instant chat, read receipts, media sharing, and presence indicators 
 
 ---
 
-<a name="getting-started"></a>
-
-## 🚀 Getting Started
+## <a name="getting-started">🚀 Getting Started</a>
 
 ### ✅ Prerequisites
 
@@ -222,9 +247,7 @@ npm run dev
 
 ---
 
-<a name="feature-breakdown"></a>
-
-## 🧩 Feature Breakdown
+## <a name="feature-breakdown">🧩 Feature Breakdown</a>
 
 ### Authentication
 
@@ -258,9 +281,7 @@ npm run dev
 
 ---
 
-<a name="documentation"></a>
-
-## 📚 Documentation
+## <a name="documentation">📚 Documentation</a>
 
 - 🏗️ [Architecture Overview](./architecture.md)
 - 🗺️ [User Flow Diagram](./flowchart.md)
@@ -326,9 +347,7 @@ This codebase features **comprehensive JSDoc documentation** throughout all majo
 
 ---
 
-<a name="project-structure"></a>
-
-## 🗂️ Project Structure
+## <a name="project-structure">🗂️ Project Structure</a>
 
 ```
 app/                  # Next.js App Router structure
@@ -371,9 +390,7 @@ README.md             # Project documentation (you’re here)
 
 ---
 
-<a name="available-commands"></a>
-
-## 🛠️ Available Commands
+## <a name="available-commands">🛠️ Available Commands</a>
 
 | Command       | Purpose                         |
 | ------------- | ------------------------------- |
@@ -385,9 +402,7 @@ README.md             # Project documentation (you’re here)
 
 ---
 
-<a name="deployment"></a>
-
-## 🚢 Deployment (Vercel)
+## <a name="deployment">🚢 Deployment</a>
 
 1. Push the repo to GitHub.
 2. Import it into **Vercel**.
@@ -398,36 +413,28 @@ _(Any platform that supports Next.js 14 works; Vercel just makes it painless.)_
 
 ---
 
-<a name="license"></a>
-
-## 📜 License
+## <a name="license">📜 License</a>
 
 © 2025 **Dayle Cortes** – All rights reserved.  
 Please contact me for licensing or commercial inquiries.
 
 ---
 
-<a name="about-me"></a>
-
-## 👨‍💻 About Me
+## <a name="about-me">👨‍💻 About Me</a>
 
 I’m **Dayle Cortes**, a full-stack developer focused on responsive web experiences.  
 This messenger app showcases my ability to integrate modern frameworks, realtime infrastructure, and elegant UI design into a production-ready app.
 
 ---
 
-<a name="acknowledgments"></a>
-
-## 🙏 Acknowledgments
+## <a name="acknowledgments">🙏 Acknowledgments</a>
 
 - **Antonio Erdeljac** aka "_codewithantonio_", his tutorial kick-started this build.
 - The open-source communities behind **Next.js**, **Prisma**, **Tailwind CSS**, and **Pusher**.
 
 ---
 
-<a name="note"></a>
-
-## 📌 Note
+## <a name="note">📌 Note</a>
 
 This app was originally built by following @codewithantonio’s YouTube tutorial for learning and inspiration.  
 The project was developed entirely in my local IDE (outside of GitHub) without initializing git, and I’ve reconstructed the commit history solely to reflect a realistic development flow and demonstrate my understanding of fullstack architecture and recent modifications, not as a record of the actual chronological build.
