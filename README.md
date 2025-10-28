@@ -37,31 +37,18 @@ A full-featured, real-time chat platform built with **Next.js 14 (App Router)** 
 ## <a name="project-highlights">✨ Project Highlights</a>
 
 - **`Built from Scratch`**: 100% coded from the ground up to learn the full-stack messaging architecture with guidance from "codewithantonio."
-
 - **`Modern PERN Stack`**: Next.js 14 (App Router), React 18, MongoDB, Prisma ORM for enterprise-level type safety and server-side rendering.
-
 - **`Styling`**: Tailwind CSS + Headless UI for responsive and accessible UIs optimized for all screen sizes.
-
 - **`Global State`**: Zustand for lightning-fast client state management with minimal boilerplate.
-
 - **`Security`**: NextAuth.js, bcrypt, CORS, and JWT session-based authentication with OAuth providers (Google, GitHub).
-
 - **`Real-Time Messaging`**: Pusher channels enable instant message delivery, presence tracking, and live conversation updates.
-
 - **`DB Integration`**: MongoDB managed via Prisma ORM with comprehensive schema documentation and type-safe operations.
-
 - **`DX`**: Structured error handling on both frontend and backend for real-world readiness and great dev experience.
-
 - **`Front-to-Back Ownership`**: Every line written was part of my step-by-step growth in full-stack architecture.
-
 - **`Beyond Tutorial Learning`**: Started with codewithantonio's guidance but evolved through my own implementation, experimentation, and customization.
-
 - **`📚 Production-Ready Documentation`**: Comprehensive JSDoc comments throughout the entire codebase with mentoring tone, explaining the "why" behind every code decision.
-
 - **`🎓 Educational Codebase`**: Context-aware documentation serves as learning resource for understanding modern full-stack development patterns.
-
 - **`Beginner Friendly`**: Clean code, clear structure, plenty of learning opportunities in authentication, real-time features, and database design.
-
 - **`Deployment Ready`**: Multiple deployment options with detailed guides for Vercel hosting and environment setup.
 
 ---
